@@ -24,61 +24,14 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="customer_details">
-            	<div class="row">
-            		<div class="col-md-6">
-            			<div class="form-group">
-            			  <label>Name</label>
-            			  <input autocomplete="off" id="customer_name" name="customer[name]" class="form-control" size="30" type="text" maxlength="50">
-            			</div>
-            		</div>
-            		<div class="col-md-6">
-            			<div class="form-group">
-            			  <label>Company</label>
-            			  <input autocomplete="off" id="customer_company" name="customer[company]" class="form-control" size="30" type="text" maxlength="100">
-            			</div>
-            		</div>
-            	</div>
-            	<div class="row">
-            		<div class="col-md-6">
-            			<div class="form-group">
-            			  <label for="customer_vat_number_attributes_identifier_type_id"><?= $this->translate('VAT Identification Type') ?></label>
-            			  <select autocomplete="off" id="customer_vat_number_attributes_identifier_type_id" name="customer[vat_number_attributes][identifier_type_id]" class="form-control">
-            			    <option value="1" selected="selected">NIF</option>
-                            <option value="2">NIF/IVA (NIF Operador intracomunitario)</option>
-                            <option value="3">Pasaporte</option>
-                            <option value="4">Documento oficial de identificación expedido por el país o territorio de residencia</option>
-                            <option value="5">Certificado de residencia fiscal</option>
-                            <option value="6">Otro documento probatorio</option>
-                          </select>
-            			</div>
-            			<div class="form-group">
-            				<label for="customer_vat_number_attributes_identifier"><?= $this->translate('VAT Identification number') ?></label>
-            				<input autocomplete="off" id="customer_vat_number_attributes_identifier" name="customer[vat_number_attributes][identifier]" class="form-control" size="30" type="text">
-            			</div>
-            		</div>
-            		<div class="col-md-6">
-            			<div class="form-group">
-            			  <label for="customer_telephone"><?= $this->translate('Telephone') ?></label>
-            			  <input autocomplete="off" id="customer_telephone" name="customer[telephone]" class="form-control" size="30" type="text" maxlength="50">
-            			</div>
-            			<div class="form-group">
-            			   <label for="customer_mobile"><?= $this->translate('Mobile phone') ?></label>
-            			   <input autocomplete="off" id="customer_mobile" name="customer[mobile]" class="form-control" size="30" type="text" maxlength="50">
-            			</div>
-            			<div class="form-group">
-            			   <label for="customer_email"><?= $this->translate('E-mail address')?></label>
-            			   <input autocomplete="off" id="customer_email" name="customer[email]" class="form-control" size="30" type="text" maxlength="100">
-            			</div>
-            		</div>
-            	</div>
+            	<?= $this->partial('customer/partial/details'); ?>
             </div>
-            <div role="tabpanel" class="tab-pane" id="profile">...</div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+            	<?= $this->partial('customer/partial/address'); ?>
+            </div>
             <div role="tabpanel" class="tab-pane" id="messages">...</div>
             <div role="tabpanel" class="tab-pane" id="tab_customer_notes">
-              <div class="form-group">
-                <label for="customer_notes">Notas</label>
-                <textarea autocomplete="off" cols="40" id="customer_notes" name="customer[notes]" class="form-control" rows="10"></textarea>
-              </div>
+              <?= $this->partial('customer/partial/notes'); ?>
             </div>
           </div>
 

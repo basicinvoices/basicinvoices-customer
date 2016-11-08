@@ -30,6 +30,11 @@ return [
     //    ],
     //],
     'view_manager' => [
+        'template_map' => [
+            'customer/partial/details'           => __DIR__ . '/../view/partial/customer-details.phtml',
+            'customer/partial/address'           => __DIR__ . '/../view/partial/customer-address.phtml',
+            'customer/partial/notes'           => __DIR__ . '/../view/partial/customer-notes.phtml',
+        ],
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
