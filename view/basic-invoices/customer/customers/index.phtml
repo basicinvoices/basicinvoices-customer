@@ -1,0 +1,93 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#customer_details" aria-controls="customer_details" role="tab" data-toggle="tab"><?= $this->translate('Customer details') ?></a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?= $this->translate('Addresses') ?></a></li>
+            <li role="presentation"><a href="#tab_customer_notes" aria-controls="tab_customer_notes" role="tab" data-toggle="tab"><?= $this->translate('Notes') ?></a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="customer_details">
+            	<div class="row">
+            		<div class="col-md-6">
+            			<div class="form-group">
+            			  <label>Name</label>
+            			  <input autocomplete="off" id="customer_name" name="customer[name]" class="form-control" size="30" type="text" maxlength="50">
+            			</div>
+            		</div>
+            		<div class="col-md-6">
+            			<div class="form-group">
+            			  <label>Company</label>
+            			  <input autocomplete="off" id="customer_company" name="customer[company]" class="form-control" size="30" type="text" maxlength="100">
+            			</div>
+            		</div>
+            	</div>
+            	<div class="row">
+            		<div class="col-md-6">
+            			<div class="form-group">
+            			  <label for="customer_vat_number_attributes_identifier_type_id"><?= $this->translate('VAT Identification Type') ?></label>
+            			  <select autocomplete="off" id="customer_vat_number_attributes_identifier_type_id" name="customer[vat_number_attributes][identifier_type_id]" class="form-control">
+            			    <option value="1" selected="selected">NIF</option>
+                            <option value="2">NIF/IVA (NIF Operador intracomunitario)</option>
+                            <option value="3">Pasaporte</option>
+                            <option value="4">Documento oficial de identificación expedido por el país o territorio de residencia</option>
+                            <option value="5">Certificado de residencia fiscal</option>
+                            <option value="6">Otro documento probatorio</option>
+                          </select>
+            			</div>
+            			<div class="form-group">
+            				<label for="customer_vat_number_attributes_identifier"><?= $this->translate('VAT Identification number') ?></label>
+            				<input autocomplete="off" id="customer_vat_number_attributes_identifier" name="customer[vat_number_attributes][identifier]" class="form-control" size="30" type="text">
+            			</div>
+            		</div>
+            		<div class="col-md-6">
+            			<div class="form-group">
+            			  <label for="customer_telephone"><?= $this->translate('Telephone') ?></label>
+            			  <input autocomplete="off" id="customer_telephone" name="customer[telephone]" class="form-control" size="30" type="text" maxlength="50">
+            			</div>
+            			<div class="form-group">
+            			   <label for="customer_mobile"><?= $this->translate('Mobile phone') ?></label>
+            			   <input autocomplete="off" id="customer_mobile" name="customer[mobile]" class="form-control" size="30" type="text" maxlength="50">
+            			</div>
+            			<div class="form-group">
+            			   <label for="customer_email"><?= $this->translate('E-mail address')?></label>
+            			   <input autocomplete="off" id="customer_email" name="customer[email]" class="form-control" size="30" type="text" maxlength="100">
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">...</div>
+            <div role="tabpanel" class="tab-pane" id="messages">...</div>
+            <div role="tabpanel" class="tab-pane" id="tab_customer_notes">
+              <div class="form-group">
+                <label for="customer_notes">Notas</label>
+                <textarea autocomplete="off" cols="40" id="customer_notes" name="customer[notes]" class="form-control" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
