@@ -1,21 +1,39 @@
+<?php 
+$form->setAttribute('action', $this->url('customers', array('action' => 'add')));
+$form->prepare();
+?>
+
+<?= $this->form()->openTag($form); ?>
 
 <div class="panel panel-default">
 	<div class="panel-heading"><?= $this->translate('Customer details') ?></div>
 	<div class="panel-body">
-		<?= $this->partial('customer/partial/details'); ?>
+		<?= $this->partial('customer/partial/details', ['form' => $form]); ?>
 	</div>
 </div>
 
 <div class="panel panel-default">
 	<div class="panel-heading"><?= $this->translate('Address') ?></div>
 	<div class="panel-body">
-		<?= $this->partial('customer/partial/address'); ?>
+		<?= $this->partial('customer/partial/address', ['form' => $form]); ?>
 	</div>
 </div>
 
 <div class="panel panel-default">
 	<div class="panel-heading"><?= $this->translate('Notes') ?></div>
 	<div class="panel-body">
-		<?= $this->partial('customer/partial/notes'); ?>
+		<?= $this->partial('customer/partial/notes', ['form' => $form]); ?>
 	</div>
 </div>
+
+	<?=  $this->formHidden($form->get('csrf'));?>
+	
+	<div class="btn-block">
+	<?php
+    	$submit = $form->get('submit');
+    	$submit->setAttribute('class', 'btn btn-primary btn-lg');
+    	echo $this->formSubmit($form->get('submit')); 
+	?>
+	</div>
+	
+<?= $this->form()->closeTag(); ?>

@@ -3,6 +3,7 @@ namespace BasicInvoices\Customer\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use BasicInvoices\Customer\Form\CustomerForm;
 
 class CustomersController extends AbstractActionController
 {
@@ -13,7 +14,11 @@ class CustomersController extends AbstractActionController
     
     public function addAction()
     {
-        return new ViewModel();
+        $form = new CustomerForm();
+        
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
     
     public function editAction()

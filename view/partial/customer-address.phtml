@@ -130,7 +130,13 @@
 	</div>
 	<div class="col-md-3">
 		<div class="form-group">
-			<label for="customer_addresses_attributes_0_country_id"><?= $this->translate('Country') ?></label>
+		<?php 
+            $country = $form->get('country');
+            $country->setAttribute('class', 'form-control');
+            
+            echo $this->formLabel($country);
+            echo $this->formCountrySelect($country); 
+		?>
 			<select autocomplete="off" id="customer_addresses_attributes_0_country_id" name="customer[addresses_attributes][0][country_id]" class="form-control">
 				<option value="1">Andorra</option>
                 <option value="2">Emiratos Árabes Unidos</option>

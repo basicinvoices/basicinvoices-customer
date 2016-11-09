@@ -1,47 +1,76 @@
 <div class="row">
 	<div class="col-md-6">
 		<div class="form-group">
-			<label for="customer_name"><?= $this->translate('Name') ?></label>
-			<input autocomplete="off" id="customer_name" name="customer[name]" class="form-control" size="30" type="text" value="" maxlength="50">
+			<?php 
+			$name = $form->get('name');
+			$name->setAttribute('class', 'form-control');
+			$name->setAttribute('required', 'required');
+			
+			echo $this->formLabel($name);
+			echo $this->formText($name);
+			?>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="form-group">
-			<label for="customer_company"><?= $this->translate('Company') ?></label>
-			<input autocomplete="off" id="customer_company" name="customer[company]" class="form-control" size="30" type="text" value="" maxlength="100">
+			<?php 
+			$company = $form->get('company');
+			$company->setAttribute('class', 'form-control');
+			
+			echo $this->formLabel($company);
+			echo $this->formText($company);
+			?>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-6">
 		<div class="form-group">
-			<label for="customer_vat_number_attributes_identifier_type_id">Tipo de Identificación Fiscal</label>
-			<select autocomplete="off" id="customer_vat_number_attributes_identifier_type_id" name="customer[vat_number_attributes][identifier_type_id]" class="form-control">
-				<option value="1" selected="selected">NIF</option>
-                <option value="2">NIF/IVA (NIF Operador intracomunitario)</option>
-                <option value="3">Pasaporte</option>
-                <option value="4">Documento oficial de identificación expedido por el país o territorio de residencia</option>
-                <option value="5">Certificado de residencia fiscal</option>
-                <option value="6">Otro documento probatorio</option>
-            </select>
+		<?php 
+			$vat_type = $form->get('vat_type');
+			$vat_type->setAttribute('class', 'form-control');
+			
+			echo $this->formLabel($vat_type);
+			echo $this->formSelect($vat_type);
+	    ?>
 		</div>
 		<div class="form-group">
-			<label for="customer_vat_number_attributes_identifier">Num. Identificación Fiscal</label>
-			<input autocomplete="off" id="customer_vat_number_attributes_identifier" name="customer[vat_number_attributes][identifier]" class="form-control" size="30" type="text" value="" >
+		<?php 
+			$vat_number = $form->get('vat_number');
+			$vat_number->setAttribute('class', 'form-control');
+			
+			echo $this->formLabel($vat_number);
+			echo $this->formText($vat_number);
+	    ?>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="form-group">
-			<label for="customer_telephone">Teléfono</label>
-			<input autocomplete="off" id="customer_telephone" name="customer[telephone]" class="form-control" size="30" type="text" value="" maxlength="50">
+		<?php 
+			$phone = $form->get('phone');
+			$phone->setAttribute('class', 'form-control');
+			
+			echo $this->formLabel($phone);
+			echo $this->formText($phone);
+	    ?>
 		</div>
 		<div class="form-group">
-			<label for="customer_mobile">Teléfono móvil</label>
-			<input autocomplete="off" id="customer_mobile" name="customer[mobile]" class="form-control" size="30" type="text" value="" maxlength="50">
+		<?php 
+			$phone = $form->get('mobile');
+			$phone->setAttribute('class', 'form-control');
+			
+			echo $this->formLabel($phone);
+			echo $this->formText($phone);
+	    ?>
 		</div>
 		<div class="form-group">
-			<label for="customer_email">Correo electrónico</label>
-			<input autocomplete="off" id="customer_email" name="customer[email]" class="form-control" size="30" type="text" value="" maxlength="100">
+		<?php 
+			$email = $form->get('email');
+			$email->setAttribute('class', 'form-control');
+			
+			echo $this->formLabel($email);
+			echo $this->formText($email);
+	    ?>
 		</div>
 	</div>
 </div>
