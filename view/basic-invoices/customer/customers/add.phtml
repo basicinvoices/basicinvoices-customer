@@ -3,6 +3,10 @@ $form->setAttribute('action', $this->url('customers', array('action' => 'add')))
 $form->prepare();
 ?>
 
+<div class="page-header">
+	<h1><?= $this->translate('New Customer') ?></h1>
+</div>
+
 <?= $this->form()->openTag($form); ?>
 
 <div class="panel panel-default">

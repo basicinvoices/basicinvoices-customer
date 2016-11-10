@@ -16,6 +16,14 @@ class CustomersController extends AbstractActionController
     {
         $form = new CustomerForm();
         
+        $request = $this->getRequest();
+        if ($request->isPost()){
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                // TODO: Store customer
+            }
+        }
+        
         return new ViewModel([
             'form' => $form,
         ]);
@@ -23,6 +31,18 @@ class CustomersController extends AbstractActionController
     
     public function editAction()
     {
-        return new ViewModel();
+        $form = new CustomerForm();
+        
+        $request = $this->getRequest();
+        if ($request->isPost()){
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                // TODO: Store customer
+            }
+        }
+        
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 }

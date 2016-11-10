@@ -16,6 +16,10 @@ class CustomerForm extends Form
             'options' => [
                 'label' => 'Name',
             ],
+            'attributes' => [
+                'autocomplete' => 'off',
+                'required'     => 'required',
+            ],
         ]);
         
         $this->add([
@@ -23,6 +27,9 @@ class CustomerForm extends Form
             'type' => 'Text',
             'options' => [
                 'label' => 'Company',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
             ],
         ]);
         
@@ -49,6 +56,9 @@ class CustomerForm extends Form
             'options' => [
                 'label' => 'VAT ID Number',
             ],
+            'attributes' => [
+                'autocomplete' => 'off',
+            ],
         ]);
         
         $this->add([
@@ -56,6 +66,9 @@ class CustomerForm extends Form
             'type' => 'Zend\Form\Element\Tel',
             'options' => [
                 'label' => 'Phone',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
             ],
         ]);
         
@@ -65,6 +78,9 @@ class CustomerForm extends Form
             'options' => [
                 'label' => 'Mobile',
             ],
+            'attributes' => [
+                'autocomplete' => 'off',
+            ],
         ]);
         
         $this->add([
@@ -73,6 +89,9 @@ class CustomerForm extends Form
             'options' => [
                 'label' => 'E-Mail Address',
             ],
+            'attributes' => [
+                'autocomplete' => 'off',
+            ],
         ]);
         
         
@@ -80,11 +99,74 @@ class CustomerForm extends Form
         // Address
         //
         $this->add([
-            'name' => 'country',
-            'type' => 'BasicInvoices\Iso\Form\Element\CountrySelect',
+            'name' => 'street_1',
+            'type' => 'Text',
             'options' => [
-                'label' => 'Country',
+                'label' => 'Street',
             ],
+            'attributes' => [
+                'autocomplete' => 'off',
+                'required'     => 'required',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'street_2',
+            'type' => 'Text',
+            'options' => [
+                'label' => 'Street (Additional)',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'city',
+            'type' => 'Text',
+            'options' => [
+                'label' => 'City',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
+                'required'     => 'required',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'state',
+            'type' => 'Text',
+            'options' => [
+                'label' => 'State',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
+                'required'     => 'required',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'postal_code',
+            'type' => 'Text',
+            'options' => [
+                'label' => 'Postal code',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
+                'required'     => 'required',
+            ],
+        ]);
+        
+        $this->add([
+            'name' => 'country',
+            'type' => 'BasicInvoices\Iso\Country\Form\Element\CountrySelect',
+            'options' => [
+                'label'    => 'Country',
+            ],
+            'attributes' => [
+                'autocomplete' => 'off',
+                'required'     => 'required',
+            ]
         ]);
         
         //
@@ -99,6 +181,7 @@ class CustomerForm extends Form
             ],
             'attributes' => [
                 'rows' => 10,
+                'autocomplete' => 'off',
             ],
         ]);
         
