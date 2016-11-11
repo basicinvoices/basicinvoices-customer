@@ -4,6 +4,8 @@ namespace BasicInvoices\Customer\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use BasicInvoices\Customer\Form\CustomerForm;
+use BasicInvoices\Customer\Model\Customer;
+use BasicInvoices\Customer\Model\CustomerNote;
 
 class CustomersController extends AbstractActionController
 {
@@ -21,6 +23,19 @@ class CustomersController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 // TODO: Store customer
+                $customer = new Customer();
+                $customer->exchangeArray($request->getPost());
+                
+                // TODO: Save it
+                
+                $customerNote = new CustomerNote();
+                $customerNote->customer_id = $customer->getId();
+                $customerNote->note        = $request->getPost('note');
+                
+                // TODO: Save Note
+                
+            } else {
+                // TODO: Error messages
             }
         }
         

@@ -3,8 +3,9 @@ namespace BasicInvoices\Customer\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Element;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class CustomerForm extends Form
+class CustomerForm extends Form implements InputFilterProviderInterface
 {
     public function __construct($name = null, $options = null)
     {
@@ -197,5 +198,29 @@ class CustomerForm extends Form
                 'value' => 'Save'
             )
         ));
+    }
+    
+    public function getInputFilterSpecification() 
+    {
+        return [
+            'company' => [
+                'required' => false,
+            ],
+            'vat_type' => [
+                'required' => false,
+            ],
+            'vat_number' => [
+                'required' => false,
+            ],
+            'phone' => [
+                'required' => false,
+            ],
+            'mobile' => [
+                'required' => false,
+            ],
+            'email' => [
+                'required' => false,
+            ]
+        ];
     }
 }
