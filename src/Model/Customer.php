@@ -1,7 +1,7 @@
 <?php
 namespace BasicInvoices\Customer\Model;
 
-class Customer
+class Customer implements CustomerInterface
 {
     protected $id = 0;
     

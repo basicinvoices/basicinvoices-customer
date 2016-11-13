@@ -21,14 +21,14 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\CustomersController::class => InvokableFactory::class,
+            Controller\CustomersController::class => Controller\Factory\CustomerControllerFactory::class,
         ],
     ],
-    //'service_manager' => [
-    //    'factories' => [
-    //        'TaxManager' => Service\TaxManagerServiceFactory::class,
-    //    ],
-    //],
+    'service_manager' => [
+        'factories' => [
+            CustomerManager::class => Service\CustomerManagerFactory::class,
+        ],
+    ],
     'translator' => [
         'translation_file_patterns' => [
             [

@@ -7,6 +7,12 @@ use BasicInvoices\Iso\Country\Model\Country;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Sql\TableIdentifier;
 use BasicInvoices\Iso\Country\CountryManager;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Update;
+use Zend\Db\Sql\Sql;
+use Zend\Db\ResultSet\ResultSet;
+use BasicInvoices\Customer\Hydrator\CustomerHydrator;
 
 class CustomerManager
 {
@@ -37,6 +43,29 @@ class CustomerManager
         $this->adapter = $adapter;
     }
     
+    public function executeInsert(Insert $insert)
+    {
+        
+    }
+    
+    public function executeUpdate(Update $insert)
+    {
+    
+    }
+    
+    public function executeSelect(Select $select)
+    {
+        $sql = new Sql($this->adapter);
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result    = $statement->execute();
+        
+        $resultSet = new CustomerHydrator($this->countryManager);
+        $resultSet->initialize($result);
+        
+        return $resultSet;
+    }
+    
     public function save(Customer $customer, CustomerNote $note = null)
     {
         $data = $customer->getArrayCopy();
@@ -45,6 +74,10 @@ class CustomerManager
             $data['country'] = $data['country']->getAlpha3();
         }
         
+        $sql    = new Sql($this->adapter);
+        $select = $sql->select($this->table);
+        
+        return $this->executeSelect($select);
         
     }
 }

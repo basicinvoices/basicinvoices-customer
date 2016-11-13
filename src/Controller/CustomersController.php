@@ -6,9 +6,17 @@ use Zend\View\Model\ViewModel;
 use BasicInvoices\Customer\Form\CustomerForm;
 use BasicInvoices\Customer\Model\Customer;
 use BasicInvoices\Customer\Model\CustomerNote;
+use BasicInvoices\Customer\CustomerManager;
 
 class CustomersController extends AbstractActionController
 {
+    protected $customerManager;
+    
+    public function __construct(CustomerManager $customerManager)
+    {
+        $this->customerManager = $customerManager;
+    }
+    
     public function indexAction()
     {
         return new ViewModel();
@@ -31,6 +39,7 @@ class CustomersController extends AbstractActionController
                 $customerNote = new CustomerNote();
                 $customerNote->customer_id = $customer->getId();
                 $customerNote->note        = $request->getPost('note');
+                
                 
                 // TODO: Save Note
                 
