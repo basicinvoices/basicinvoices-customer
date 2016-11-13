@@ -6,6 +6,7 @@ use Interop\Container\ContainerInterface;
 use BasicInvoices\Customer\CustomerManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Db\Adapter\AdapterInterface;
+use BasicInvoices\Customer\Hydrator\CustomerHydrator;
 
 class CustomerManagerFactory implements FactoryInterface
 {
@@ -20,7 +21,8 @@ class CustomerManagerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $adapter = $container->get(AdapterInterface::class);
-        return new CustomerManager($adapter);
+        $hydrator = $container->get(CustomerHydrator::class);
+        return new CustomerManager($adapter, 'customers', $hydrator);
     }
     
     /**

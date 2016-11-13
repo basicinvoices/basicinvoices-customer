@@ -2,7 +2,6 @@
 namespace BasicInvoices\Customer;
 
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -27,6 +26,7 @@ return [
     'service_manager' => [
         'factories' => [
             CustomerManager::class => Service\CustomerManagerFactory::class,
+            Hydrator\CustomerHydrator::class => Service\CustomerHydratorFactory::class,
         ],
     ],
     'translator' => [

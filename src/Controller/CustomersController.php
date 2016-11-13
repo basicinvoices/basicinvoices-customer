@@ -43,6 +43,8 @@ class CustomersController extends AbstractActionController
                 
                 // TODO: Save Note
                 
+                $this->customerManager->save($customer);
+                
             } else {
                 // TODO: Error messages
             }

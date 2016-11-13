@@ -26,12 +26,14 @@ class CustomerManager
      */
     protected $countryManager;
     
+    protected $hydrator;
+    
     /**
      * @var string|array|TableIdentifier
      */
     protected $table = null;
     
-    public function __construct(AdapterInterface $adapter, $table = 'customers')
+    public function __construct(AdapterInterface $adapter, $table = 'customers', $hydrator)
     {
         // table
         if (!(is_string($table) || $table instanceof TableIdentifier || is_array($table))) {

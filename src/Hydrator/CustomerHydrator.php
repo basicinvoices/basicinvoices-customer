@@ -18,6 +18,11 @@ class CustomerHydrator extends AbstractHydrator
         $this->countryManager = $countryManager;
     }
     
+    public function extract($object)
+    {
+        
+    }
+    
     /**
      * Hydrate $object with the provided $data.
      *
