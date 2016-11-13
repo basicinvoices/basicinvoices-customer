@@ -5,6 +5,7 @@ use BasicInvoices\Customer\Model\CustomerInterface;
 
 use BasicInvoices\Iso\Country\CountryManager;
 use Zend\Hydrator\AbstractHydrator;
+use BasicInvoices\Iso\Country\Model\Country;
 
 class CustomerHydrator extends AbstractHydrator
 {
@@ -20,7 +21,7 @@ class CustomerHydrator extends AbstractHydrator
     
     public function extract($object)
     {
-        
+        var_dump($object);
     }
     
     /**
@@ -32,13 +33,20 @@ class CustomerHydrator extends AbstractHydrator
      */
     public function hydrate(array $data, $object)
     {
-        if (!$object instanceof CustomerInterface) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be an instance of BasicInvoices\Customer\Model\CustomerInterface)',
-                __METHOD__
-            ));
+        $object->name = $data['name'];
+        
+        if (isset($data['country'])) {
+            if ($data['country'] instanceof Country) {
+                $data['country'] = $data['country']->getAlpha3();
+            }
+            
+            if (!empty($data['country'])) {
+                $object->setCountry($this->countryManager->get($data['country']));
+            }
         }
         
-        // TODO: We should inject the country.
+        
+        
+        return $object;
     }
 }

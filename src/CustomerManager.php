@@ -66,6 +66,7 @@ class CustomerManager
         $result    = $statement->execute();
         
         $resultSet = new HydratingResultSet();
+        $resultSet->setObjectPrototype(new Customer());
         $resultSet->setHydrator($this->hydrator);
         $resultSet->initialize($result);
         

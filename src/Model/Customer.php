@@ -73,6 +73,16 @@ class Customer implements CustomerInterface
        }
     }
     
+    public function __set($name, $value) 
+    {
+        switch ($name) {
+            case 'name':
+                // TODO: validate
+                $this->name = $value;
+                return $this;
+        }
+    }
+    
     public function exchangeArray($input)
     {
         if ($input instanceof \ArrayObject) {
@@ -119,5 +129,16 @@ class Customer implements CustomerInterface
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function setCountry(Country $country)
+    {
+        $this->country = $country;
+        return $this;
     }
 }
