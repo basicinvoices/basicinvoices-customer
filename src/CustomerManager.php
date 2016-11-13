@@ -13,6 +13,7 @@ use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use BasicInvoices\Customer\Hydrator\CustomerHydrator;
+use Zend\Db\ResultSet\HydratingResultSet;
 
 class CustomerManager
 {
@@ -43,6 +44,8 @@ class CustomerManager
         
         // adapter
         $this->adapter = $adapter;
+        
+        $this->hydrator = $hydrator;
     }
     
     public function executeInsert(Insert $insert)
@@ -62,10 +65,19 @@ class CustomerManager
         $statement = $sql->prepareStatementForSqlObject($select);
         $result    = $statement->execute();
         
-        $resultSet = new CustomerHydrator($this->countryManager);
+        $resultSet = new HydratingResultSet();
+        $resultSet->setHydrator($this->hydrator);
         $resultSet->initialize($result);
         
         return $resultSet;
+    }
+    
+    public function getAll()
+    {
+        $sql    = new Sql($this->adapter);
+        $select = $sql->select($this->table);
+        
+        return $this->executeSelect($select);
     }
     
     public function save(Customer $customer, CustomerNote $note = null)

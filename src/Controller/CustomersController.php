@@ -19,6 +19,8 @@ class CustomersController extends AbstractActionController
     
     public function indexAction()
     {
+        $this->customerManager->getAll();
+        
         return new ViewModel();
     }
     
