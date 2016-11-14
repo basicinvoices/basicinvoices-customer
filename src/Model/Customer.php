@@ -1,6 +1,8 @@
 <?php
 namespace BasicInvoices\Customer\Model;
 
+use BasicInvoices\Customer\Exception;
+
 class Customer implements CustomerInterface
 {
     protected $id = 0;
@@ -42,45 +44,22 @@ class Customer implements CustomerInterface
      */
     public function __get($name)
     {
-       switch ($name)
-       {
-           case 'id':
-               return $this->id;
-               break;
-           case 'name':
-               return $this->name;
-               break;
-           case 'company':
-               return $this->company;
-               break;
-           case 'vatType':
-           case 'vat_type':
-               return $this->vatType;
-               break;
-           case 'vatNumber':
-           case 'vat_number':
-               return $this->vatNumber;
-               break;
-           case 'phone':
-               return $this->phone;
-               break;
-           case 'mobile':
-               return $this->mobile;
-               break;
-           case 'email':
-               return $this->email;
-               break;
-       }
+        $getter = 'get' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $name)));
+        if (method_exists($this, $getter)) {
+            return $this->$getter();
+        }
+    
+        trigger_error(sprintf('Cannot access protected property %s::$%s', __CLASS__, $name), E_USER_ERROR);
     }
     
     public function __set($name, $value) 
     {
-        switch ($name) {
-            case 'name':
-                // TODO: validate
-                $this->name = $value;
-                return $this;
+        $setter = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $name)));
+        if (method_exists($this, $setter)) {
+            return $this->$setter($value);
         }
+        
+        trigger_error(sprintf('Cannot access protected property %s::$%s', __CLASS__, $name), E_USER_ERROR);
     }
     
     public function exchangeArray($input)
@@ -134,6 +113,136 @@ class Customer implements CustomerInterface
     public function getName()
     {
         return $this->name;
+    }
+    
+    public function getCompany()
+    {
+        return $this->company;
+    }
+    
+    public function getVatType()
+    {
+        return $this->vatType;
+    }
+    
+    public function getVatNumber()
+    {
+        return $this->vatNumber;
+    }
+    
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+    
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    
+    protected function setId($id)
+    {
+        $this->id = (int) $id;
+        return $this;
+    }
+    
+    public function setName($name)
+    {
+        if (!is_string($name)) {
+            throw new Exception\InvalidArgumentException('The customer name must be a non-empty string');
+        }
+        
+        $name = trim($name);
+        if (empty($name)) {
+            throw new Exception\InvalidArgumentException('The customer name can not be empty');
+        }
+        
+        $this->name = $name;
+        return $this;
+    }
+    
+    public function setCompany($company)
+    {
+        if (!is_null($company)) {
+            if (!is_string($company)) {
+                throw new Exception\InvalidArgumentException('The customer company name must be a string or null');
+            }
+            
+            $company = trim($company);
+            if (empty($company)) {
+                $company = null;
+            }
+        }
+        
+        $this->company = $company;
+        return $this;
+    }
+    
+    public function setPhone($phone)
+    {
+        if (!is_null($phone)) {
+            if (!is_string($phone)) {
+                throw new Exception\InvalidArgumentException('The customer phne must be a string or null');
+            }
+        
+            $phone = trim($phone);
+            if (empty($phone)) {
+                $phone = null;
+            }
+        }
+        
+        $this->phone = $phone;
+        return $this;
+    }
+    
+    public function setMobile($phone)
+    {
+        if (!is_null($phone)) {
+            if (!is_string($phone)) {
+                throw new Exception\InvalidArgumentException('The customer mobile must be a string or null');
+            }
+        
+            $phone = trim($phone);
+            if (empty($phone)) {
+                $phone = null;
+            }
+        }
+    
+        $this->mobile = $phone;
+        return $this;
+    }
+    
+    public function setEmail($email)
+    {
+        if (!is_null($email)) {
+            if (!empty(trim($email))) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    throw new Exception\InvalidArgumentException('The customer email must be a valid email address');
+                }
+            } else {
+                $email = null;
+            }
+        }
+        
+        $this->email = $email;
+        return $this;
+    }
+    
+    public function setVatNumber($vatNumber)
+    {
+        if (!is_null($vatNumber)) {
+            if (empty(trim($vatNumber))) {
+                $vatNumber = null;
+            }
+        }
+        
+        $this->vatNumber = $vatNumber;
+        return $this;
     }
     
     public function setCountry(Country $country)

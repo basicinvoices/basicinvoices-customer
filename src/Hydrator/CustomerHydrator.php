@@ -33,7 +33,20 @@ class CustomerHydrator extends AbstractHydrator
      */
     public function hydrate(array $data, $object)
     {
-        $object->name = $data['name'];
+        if (!$object instanceof CustomerInterface) {
+            throw new Exception\BadMethodCallException(sprintf(
+                '%s expects the provided $object to be an instance of BasicInvoices\Customer\CustomerInterface)',
+                __METHOD__
+            ));
+        }
+        
+        $object->id         = isset($data['id'])         ? (int) $data['id']   : 0;
+        $object->name       = isset($data['name'])       ? $data['name']       : null;
+        $object->company    = isset($data['company'])    ? $data['company']    : null;
+        $object->vat_number = isset($data['vat_number']) ? $data['vat_number'] : null;
+        $object->phone      = isset($data['phone'])      ? $data['phone']      : null;
+        $object->mobile     = isset($data['mobile'])     ? $data['mobile']     : null;
+        $object->email      = $data['email'];
         
         if (isset($data['country'])) {
             if ($data['country'] instanceof Country) {
