@@ -86,13 +86,50 @@ class Customer implements CustomerInterface
             $input = $input->getArrayCopy();
         }
         
-        $this->name       = isset($input['name'])        ? $input['name']        : null;
-        $this->company    = isset($input['company'])     ? $input['company']     : null;
+        // name
+        if (isset($input['name'])) {
+            $this->setName($input['name']);
+        } else {
+            throw new Exception\InvalidArgumentException('The customer name is a required field');
+        }
+        
+        // company
+        if (isset($input['company'])) {
+            $this->setCompany($input['company']);
+        } else {
+            $this->company = null;
+        }
+        
+        // TODO: Do something about VAT Type
         $this->vatType    = isset($input['vat_type'])    ? $input['vat_type']    : null;
-        $this->vatNumber  = isset($input['vat_number'])  ? $input['vat_number']  : null;
-        $this->phone      = isset($input['phone'])       ? $input['phone']       : null;
-        $this->mobile     = isset($input['mobile'])      ? $input['mobile']      : null;
-        $this->email      = isset($input['email'])       ? $input['email']       : null;
+        
+        // vat number
+        if (isset($input['vat_number'])) {
+            $this->setVatNumber($input['vat_number']);
+        } else {
+            $this->vatNumber = null;
+        }
+        
+        // phone
+        if (isset($input['phone'])) {
+            $this->setMobile($input['phone']);
+        } else {
+            $this->phone = null;
+        }
+        
+        // mobile
+        if (isset($input['mobile'])) {
+            $this->setMobile($input['mobile']);
+        } else {
+            $this->mobile = null;
+        }
+        
+        // email
+        if (isset($input['email'])) {
+            $this->setEmail($input['email']);
+        } else {
+            $this->email = null;
+        }
         
         // Address
         $this->street1    = isset($input['street_1'])    ? $input['street_1']    : null;
@@ -100,7 +137,13 @@ class Customer implements CustomerInterface
         $this->city       = isset($input['city'])        ? $input['city']        : null;
         $this->state      = isset($input['state'])       ? $input['state']       : null;
         $this->postalCode = isset($input['postal_code']) ? $input['postal_code'] : null;
-        $this->country    = isset($input['country'])     ? $input['country']     : null;
+        
+        // country
+        if (isset($input['country'])) {
+            $this->setCountry($input['country']);
+        } else {
+            throw new Exception\InvalidArgumentException('The customer country is a required field');
+        }
     }
     
     public function getArrayCopy()
@@ -113,6 +156,7 @@ class Customer implements CustomerInterface
             'phone'       => $this->phone,
             'mobile'      => $this->mobile,
             'email'       => $this->email,
+            
             // Address
             'street_1'    => $this->street1,
             'street_2'    => $this->street2,
@@ -135,6 +179,10 @@ class Customer implements CustomerInterface
     
     public function getCompany()
     {
+        if (is_null($this->company)) {
+            return $this->name;
+        }
+        
         return $this->company;
     }
     

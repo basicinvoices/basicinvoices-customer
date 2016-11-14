@@ -2,6 +2,8 @@
 <?php foreach ($customers as $customer) : ?>
 	<tr>
 		<td><?= $customer->name ?></td>
+		<td>
+			<?= $this->translate($customer->getCountry()->getName(), 'iso-3166-1') ?>
 		<td><?php  var_dump($customer)?></td>
 	</tr>
 
