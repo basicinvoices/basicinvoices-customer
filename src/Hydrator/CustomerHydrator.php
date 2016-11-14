@@ -40,25 +40,19 @@ class CustomerHydrator extends AbstractHydrator
             ));
         }
         
-        $object->id         = isset($data['id'])         ? (int) $data['id']   : 0;
-        $object->name       = isset($data['name'])       ? $data['name']       : null;
-        $object->company    = isset($data['company'])    ? $data['company']    : null;
-        $object->vat_number = isset($data['vat_number']) ? $data['vat_number'] : null;
-        $object->phone      = isset($data['phone'])      ? $data['phone']      : null;
-        $object->mobile     = isset($data['mobile'])     ? $data['mobile']     : null;
-        $object->email      = $data['email'];
-        
         if (isset($data['country'])) {
             if ($data['country'] instanceof Country) {
                 $data['country'] = $data['country']->getAlpha3();
             }
             
             if (!empty($data['country'])) {
-                $object->setCountry($this->countryManager->get($data['country']));
+                $country = $this->countryManager->get($data['country']);
+                $data['country'] = $country;
             }
         }
         
-        
+        // Call hidden exchangeArray method
+        $object->exchangeArray($data);
         
         return $object;
     }

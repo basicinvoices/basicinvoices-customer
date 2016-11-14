@@ -2,6 +2,7 @@
 namespace BasicInvoices\Customer\Model;
 
 use BasicInvoices\Customer\Exception;
+use BasicInvoices\Iso\Country\Model\Country;
 
 class Customer implements CustomerInterface
 {
@@ -36,6 +37,23 @@ class Customer implements CustomerInterface
     // Notes
     //
     
+    public function __call($name,  $arguments)
+    {
+        $argNum = count($arguments);
+        
+        if (strcmp('exchangeArray', $name) === 0) {
+            if ($argNum === 1) {
+                return $this->exchangeArray($arguments[0]);
+            } elseif ($argNum < 1) {
+                trigger_error(sprintf('Missing argument 1 for %s::%s()', __CLASS__, $name), E_USER_ERROR);
+            } else {
+                trigger_error(sprintf('Too many arguments for %s::%s()', __CLASS__, $name), E_USER_ERROR);
+            }
+        }
+        
+        trigger_error(sprintf('Call to undefined method %s::%s()', __CLASS__, $name), E_USER_ERROR);  
+    }
+    
     /**
      * Read properties.
      *
@@ -62,7 +80,7 @@ class Customer implements CustomerInterface
         trigger_error(sprintf('Cannot access protected property %s::$%s', __CLASS__, $name), E_USER_ERROR);
     }
     
-    public function exchangeArray($input)
+    protected function exchangeArray($input)
     {
         if ($input instanceof \ArrayObject) {
             $input = $input->getArrayCopy();
@@ -143,6 +161,11 @@ class Customer implements CustomerInterface
     public function getEmail()
     {
         return $this->email;
+    }
+    
+    public function getCountry()
+    {
+        return $this->country;
     }
     
     protected function setId($id)
