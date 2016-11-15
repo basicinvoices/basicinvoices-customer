@@ -211,6 +211,31 @@ class Customer implements CustomerInterface
         return $this->email;
     }
     
+    public function getStreet1()
+    {
+        return $this->street1;
+    }
+    
+    public function getStreet2()
+    {
+        return $this->street2;
+    }
+    
+    public function getCity()
+    {
+        return $this->city;
+    }
+    
+    public function getState()
+    {
+        return $this->state;
+    }
+    
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+    
     public function getCountry()
     {
         return $this->country;
