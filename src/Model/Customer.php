@@ -341,6 +341,36 @@ class Customer implements CustomerInterface
         return $this;
     }
     
+    public function setStreet1($street)
+    {
+        $this->street1 = $street;
+        return $this;
+    }
+    
+    public function setStreet2($street)
+    {
+        $this->street2 = $street;
+        return $this;
+    }
+    
+    public function setCity($city)
+    {
+        $this->city = $city;
+        return $this;
+    }
+    
+    public function setState($state)
+    {
+        $this->state = $state;
+        return $this;
+    }
+    
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $this->postalCode;
+        return $this;
+    }
+    
     public function setCountry(Country $country)
     {
         $this->country = $country;
