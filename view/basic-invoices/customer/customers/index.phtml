@@ -7,16 +7,16 @@
 	<thead>
     	<tr>
     		<th><?= $this->translate("Name") ?></th>
-    		<th>Country</th>
+    		<th><?= $this->translate('Email')?></th>
+    		<th><?= $this->translate('Phone')?></th>
     	</tr>
    	</thead>
    	<tbody>
 <?php foreach ($paginator as $customer) : ?>
     	<tr>
     		<td><?= $this->escapeHtml($customer->name) ?></td>
-    		<td>
-    			<?= $this->translate($customer->getCountry()->getName(), 'iso-3166-1') ?>
-    		</td>
+    		<td><?= $this->escapeHtml($customer->email) ?></td>
+    		<td><?= $this->escapeHtml($customer->phone) ?></td>
     	</tr>
 <?php endforeach; ?>
 	</tbody>
