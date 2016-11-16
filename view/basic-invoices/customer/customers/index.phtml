@@ -1,11 +1,34 @@
-<table>
-<?php foreach ($customers as $customer) : ?>
-	<tr>
-		<td><?= $customer->name ?></td>
-		<td>
-			<?= $this->translate($customer->getCountry()->getName(), 'iso-3166-1') ?>
-		<td><?php  var_dump($customer)?></td>
-	</tr>
-
+<table class="table table-striped">
+	<thead>
+    	<tr>
+    		<th><?= $this->translate("Name") ?></th>
+    		<th>Country</th>
+    	</tr>
+   	</thead>
+   	<tbody>
+<?php foreach ($paginator as $customer) : ?>
+    	<tr>
+    		<td><?= $this->escapeHtml($customer->name) ?></td>
+    		<td>
+    			<?= $this->translate($customer->getCountry()->getName(), 'iso-3166-1') ?>
+    		</td>
+    	</tr>
 <?php endforeach; ?>
+	</tbody>
 </table>
+
+<?php
+ // add at the end of the file after the table
+ echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'sliding',
+     // the partial to use to render the control
+     'partial/paginator.phtml',
+     // the route to link to when a user clicks a control link
+     array(
+         'route' => 'customers'
+     )
+ );
+ ?>

@@ -19,10 +19,23 @@ class CustomersController extends AbstractActionController
     
     public function indexAction()
     {
-        $customers = $this->customerManager->getAll();
+        //$customers = $this->customerManager->getAll();
+        //
+        //return new ViewModel([
+        //    'customers' => $customers
+        //]);
+        
+        // grab the paginator from the AlbumTable
+        $paginator = $this->customerManager->getAll(true);
+
+        // set the current page to what has been passed in query string, or to 1 if none set
+        $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+        
+        // set the number of items per page to 10
+        $paginator->setItemCountPerPage(10);
         
         return new ViewModel([
-            'customers' => $customers
+            'paginator' => $paginator
         ]);
     }
     

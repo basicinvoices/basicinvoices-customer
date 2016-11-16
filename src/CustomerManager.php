@@ -14,6 +14,8 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use BasicInvoices\Customer\Hydrator\CustomerHydrator;
 use Zend\Db\ResultSet\HydratingResultSet;
+use Zend\Paginator\Adapter\DbSelect;
+use Zend\Paginator\Paginator;
 
 class CustomerManager
 {
@@ -73,10 +75,30 @@ class CustomerManager
         return $resultSet;
     }
     
-    public function getAll()
+    public function getAll($paginated = false)
     {
         $sql    = new Sql($this->adapter);
         $select = $sql->select($this->table);
+        
+        if ($paginated) {
+            // create a new result set based on the Album entity
+            $resultSetPrototype = new HydratingResultSet();
+            $resultSetPrototype->setObjectPrototype(new Customer());
+            $resultSetPrototype->setHydrator($this->hydrator);
+            
+            // create a new pagination adapter object
+            $paginatorAdapter = new DbSelect(
+                // our configured select object
+                $select,
+                // the adapter to run it against
+                $this->adapter,
+                // the result set to hydrate
+                $resultSetPrototype
+            );
+            
+            $paginator = new Paginator($paginatorAdapter);
+            return $paginator;
+        }
         
         return $this->executeSelect($select);
     }
